@@ -1,0 +1,9 @@
+name: C++ code check using clang/cppcheck
+description: Check your pull requests against cppcheck and clang.
+author: Sneha Mishra
+branding:
+  icon: check-circle
+  color: green
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
