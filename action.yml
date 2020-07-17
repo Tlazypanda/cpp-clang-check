@@ -1,5 +1,5 @@
-name: C++ code check using clang/cppcheck
-description: Check your pull requests against cppcheck and clang.
+name: C++ code check using clang/cppcheck/flawfinder
+description: Check your pull requests against cppcheck, flawfinder and clang.
 author: Sneha Mishra
 branding:
   icon: check-circle
