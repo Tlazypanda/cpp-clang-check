@@ -37,7 +37,7 @@ flawfinder --columns --context --singleline . > flawfinder-report.txt
 PAYLOAD_TIDY=`cat clang-tidy-report.txt`
 PAYLOAD_FORMAT=`cat clang-format-report.txt`
 PAYLOAD_CPPCHECK=`cat cppcheck-report.txt`
-PAYLOAD_FLAWFINDER = `cat flawfinder-report.txt`
+PAYLOAD_FLAWFINDER=`cat flawfinder-report.txt`
 COMMENTS_URL=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.comments_url)
   
 echo $COMMENTS_URL
