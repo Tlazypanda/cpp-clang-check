@@ -30,7 +30,7 @@ clang-tidy *.c *.h *.cpp *.hpp *.C *.cc *.CPP *.c++ *.cp *.cxx -checks=boost-*,b
 
 clang-format --style=llvm -i *.c *.h *.cpp *.hpp *.C *.cc *.CPP *.c++ *.cp *.cxx > clang-format-report.txt
 
-cppcheck --enable=all --std=c++11 --language=c++ --output-file=cppcheck-report.txt *
+cppcheck -iclang-format-report.txt -iclang-tidy-report.txt --enable=all --std=c++11 --language=c++ --output-file=cppcheck-report.txt *
 
 flawfinder --columns --context --singleline . > flawfinder-report.txt
 
