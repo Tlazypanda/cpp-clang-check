@@ -10,7 +10,7 @@ LABEL maintainer="Tlazypanda <33183263+Tlazypanda@users.noreply.github.com>"
 
 WORKDIR /build
 RUN apt-get update
-RUN apt-get -qq -y install curl clang-tidy cmake jq clang cppcheck clang-format
+RUN apt-get -qq -y install curl clang-tidy cmake jq clang cppcheck clang-format flawfinder
 
 ADD checkall.sh /entrypoint.sh
 COPY . .
