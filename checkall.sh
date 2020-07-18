@@ -28,14 +28,11 @@ echo "Performing checkup:"
 clang-tidy --version
 clang-tidy *.cpp -checks=boost-*,bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-cplusplus-*,clang-analyzer-*,cppcoreguidelines-* > clang-tidy-report.txt
 
-clang-format --style=llvm -i *.cpp > clang-format-report.txt
-
 cppcheck -iclang-format-report.txt -iclang-tidy-report.txt --enable=all --std=c++11 --language=c++ --output-file=cppcheck-report.txt *
 
 flawfinder --columns --context --singleline . > flawfinder-report.txt
 
 PAYLOAD_TIDY=`cat clang-tidy-report.txt`
-PAYLOAD_FORMAT=`cat clang-format-report.txt`
 PAYLOAD_CPPCHECK=`cat cppcheck-report.txt`
 PAYLOAD_FLAWFINDER=`cat flawfinder-report.txt`
 COMMENTS_URL=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.comments_url)
@@ -43,8 +40,6 @@ COMMENTS_URL=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.comments_url)
 echo $COMMENTS_URL
 echo "Clang-tidy errors:"
 echo $PAYLOAD_TIDY
-echo "Clang-format errors:"
-echo $PAYLOAD_FORMAT
 echo "Cppcheck errors:"
 echo $PAYLOAD_CPPCHECK
 echo "Flawfinder errors:"
@@ -55,16 +50,10 @@ OUTPUT+=$'\n```\n'
 OUTPUT+="$PAYLOAD_TIDY"
 OUTPUT+=$'\n```\n'
 
-OUTPUT+=$'**CLANG-FORMAT WARNINGS**:\n'
-OUTPUT+=$'\n```\n'
-OUTPUT+="$PAYLOAD_FORMAT"
-OUTPUT+=$'\n```\n'
-
 OUTPUT+=$'\n**CPPCHECK WARNINGS**:\n'
 OUTPUT+=$'\n```\n'
 OUTPUT+="$PAYLOAD_CPPCHECK"
 OUTPUT+=$'\n```\n' 
-
 
 OUTPUT+=$'\n**FLAWFINDER WARNINGS**:\n'
 OUTPUT+=$'\n```\n'
